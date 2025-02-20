@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Active Fitness Session</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen p-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <div class="bg-white rounded-t-xl shadow-lg p-6 mb-6">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-3xl font-bold text-gray-800">
+                        Active Session
+                    </h1>
+                    <div class="flex gap-4">
+                        <span
+                            class="bg-green-100 text-green-800 px-4 py-2 rounded-lg"
+                        >
+                            🔴 Live Session
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Info Card -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-6">
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <h3 class="text-sm text-gray-600 mb-2">Device</h3>
+                        <p
+                            class="text-xl font-bold text-blue-600"
+                            id="deviceDisplay"
+                        >
+                            Device 1
+                        </p>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <h3 class="text-sm text-gray-600 mb-2">
+                            Exercise Type
+                        </h3>
+                        <p
+                            class="text-xl font-bold text-purple-600"
+                            id="exerciseDisplay"
+                        >
+                            Push-ups
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timer Card -->
+            <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                    Session Timer
+                </h2>
+                <div class="text-6xl font-bold text-blue-600 mb-8" id="timer">
+                    00:00
+                </div>
+
+                <div class="flex gap-4 justify-center">
+                    <!-- <button
+                        onclick="startTimer()"
+                        class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium"
+                    ></button> -->
+                    <button
+                        onclick="stopTimer()"
+                        class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-medium"
+                    >
+                        Stop
+                    </button>
+                    <!-- <button
+                        onclick="resetTimer()"
+                        class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors font-medium"
+                    >
+                        Reset
+                    </button> -->
+                </div>
+            </div>
+        </div>
+        <script>
+            let seconds = 0;
+            let isRunning = false;
+            let countdownSeconds = 10;
+
+            function updateTimer() {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                document.getElementById("timer").textContent = `${minutes
+                    .toString()
+                    .padStart(2, "0")}:${remainingSeconds
+                    .toString()
+                    .padStart(2, "0")}`;
+            }
+
+            function updateCountdown() {
+                // Update header to "Wait"
+                document.querySelector("h2.text-2xl").textContent = "Wait";
+
+                document.getElementById("timer").textContent = countdownSeconds;
+                if (countdownSeconds === 0) {
+                    // Change header back to "Session Timer" when countdown ends
+                    document.querySelector("h2.text-2xl").textContent =
+                        "Session Timer";
+                    startMainTimer();
+                } else {
+                    countdownSeconds--;
+                    setTimeout(updateCountdown, 1000);
+                }
+            }
+
+            function stopTimer() {
+                isRunning = false;
+                clearInterval(timer);
+
+                // add a timeout to redirect to leaderboard after 10 seconds
+                setTimeout(redirectToLeaderboard, 2000);
+                // Redirect to leaderboard
+                window.location.href = "leaderBoard.html";
+            }
+
+            function startMainTimer() {
+                document.getElementById("timer").textContent = "00:00";
+                isRunning = true;
+                timer = setInterval(() => {
+                    seconds++;
+                    updateTimer();
+                }, 1000);
+            }
+
+            // Modify the startTimer function to begin with countdown
+            function startTimer() {
+                if (!isRunning) {
+                    countdownSeconds = 10;
+                    updateCountdown();
+                }
+            }
+
+            function stopTimer() {
+                isRunning = false;
+                clearInterval(timer);
+                setTimeout(redirectToLeaderboard, 3000);
+                window.location.replace("leaderBoard.html");
+                window.location.href = "leaderBoard.html";
+            }
+
+            function resetTimer() {
+                stopTimer();
+                seconds = 0;
+                countdownSeconds = 10;
+                updateTimer();
+            }
+
+            // Start countdown automatically when page loads
+            window.onload = function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const device = urlParams.get("device");
+                const exercise = urlParams.get("exercise");
+
+                if (device)
+                    document.getElementById("deviceDisplay").textContent =
+                        device;
+                if (exercise)
+                    document.getElementById("exerciseDisplay").textContent =
+                        exercise;
+
+                // Auto-start the countdown
+                startTimer();
+            };
+        </script>
+    </body>
+</html>

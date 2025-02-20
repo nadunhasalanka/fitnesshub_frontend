@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fitness Challenge Leaderboard</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen p-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <div class="bg-white rounded-t-xl shadow-lg p-6 mb-6">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-3xl font-bold text-gray-800">
+                        Fitness Challenge Hub
+                    </h1>
+                    <div class="flex gap-4">
+                        <span
+                            id="active-users"
+                            class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg"
+                        >
+                            👥 Active Users: 24
+                        </span>
+                        <a
+                            href="index.html"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2"
+                        >
+                            <span> Dashboard </span>
+                            <span>▶️</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Push-up Leaderboard -->
+                <div
+                    id="pushup-leaderboard"
+                    class="bg-white rounded-xl shadow-lg p-6"
+                >
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">
+                            🏆 Push-up Champions
+                        </h2>
+                    </div>
+
+                    <!-- Single scrollable container -->
+                    <div class="space-y-4 max-h-[400px] overflow-y-auto">
+                        <!-- #1 Champion -->
+                        <!-- <div
+              class="bg-yellow-50 border border-yellow-100 rounded-lg p-4 flex items-center"
+            >
+              <div
+                class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                1
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">John Doe</div>
+                <div class="text-sm text-gray-600">150 push-ups • 2:30 min</div>
+              </div>
+              <div class="text-yellow-500">👑</div>
+            </div> -->
+
+                        <!-- #2-4 Top Performers -->
+                        <!-- <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                2
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Jane Smith</div>
+                <div class="text-sm text-gray-600">125 push-ups • 2:15 min</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                3
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Mike Johnson</div>
+                <div class="text-sm text-gray-600">100 push-ups • 2:00 min</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                4
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Sarah Wilson</div>
+                <div class="text-sm text-gray-600">95 push-ups • 1:55 min</div>
+              </div>
+            </div> -->
+                    </div>
+                </div>
+
+                <!-- Plank Champions Leaderboard -->
+                <div
+                    id="plank-leaderboard"
+                    class="bg-white rounded-xl shadow-lg p-6"
+                >
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">
+                            🏆 Plank Champions
+                        </h2>
+                    </div>
+
+                    <!-- Single scrollable container -->
+                    <div class="space-y-4 max-h-[400px] overflow-y-auto">
+                        <!-- #1 Champion -->
+                        <!-- <div
+              class="bg-yellow-50 border border-yellow-100 rounded-lg p-4 flex items-center"
+            >
+              <div
+                class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                1
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Emily Parker</div>
+                <div class="text-sm text-gray-600">5:45 min plank</div>
+              </div>
+              <div class="text-yellow-500">👑</div>
+            </div> -->
+
+                        <!-- #2-4 Top Performers -->
+                        <!-- <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                2
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">David Chen</div>
+                <div class="text-sm text-gray-600">5:10 min plank</div>
+              </div>
+            </div> -->
+                        <!-- <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                3
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Olivia Martinez</div>
+                <div class="text-sm text-gray-600">4:55 min plank</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                4
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Ryan Thompson</div>
+                <div class="text-sm text-gray-600">4:40 min plank</div>
+              </div>
+            </div> -->
+
+                        <!-- Remaining entries -->
+                        <!-- <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                5
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Sophia Kim</div>
+                <div class="text-sm text-gray-600">4:20 min plank</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                6
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">James Wilson</div>
+                <div class="text-sm text-gray-600">4:05 min plank</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                7
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Mia Johnson</div>
+                <div class="text-sm text-gray-600">3:45 min plank</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+              <div
+                class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                8
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold">Ethan Brown</div>
+                <div class="text-sm text-gray-600">3:30 min plank</div>
+              </div>
+            </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Stats (both push-ups and planks) -->
+
+            <!-- Additional Common/Average Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-2 gap-12 mt-6">
+                <div id="avg-pushups" class="bg-white rounded-xl shadow-lg p-6">
+                    <!-- <div class="text-center">
+            <div class="text-sm text-gray-600 mb-1">Avg Push-ups</div>
+            <div class="text-3xl font-bold text-blue-600">92</div>
+            <div class="text-sm text-gray-600 mt-1">per session</div>
+          </div> -->
+                </div>
+                <div id="avg-plank" class="bg-white rounded-xl shadow-lg p-6">
+                    <!-- <div class="text-center">
+            <div class="text-sm text-gray-600 mb-1">Avg Plank Time</div>
+            <div class="text-3xl font-bold text-green-600">3:52</div>
+            <div class="text-sm text-gray-600 mt-1">minutes</div>
+          </div> -->
+                </div>
+            </div>
+        </div>
+
+        <script>
+            //Get leaderboard
+            async function getLeaderboard() {
+                try {
+                    const response = await fetch(
+                        "https://script.google.com/macros/s/AKfycbyzcxRpJrqqezpIcIF13h7cWbZvu93iFcw8Vh1zcUAYLGbd3nV04rrNrRHIjeWsWkDl/exec?type=leaderboard",
+                        {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "text/plain;charset=utf-8",
+                            },
+                        }
+                    );
+
+                    const data = await response.json();
+                    displayLeaderboard(data);
+                    displayStats(data);
+                    console.log(data);
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            }
+
+            function displayLeaderboard(data) {
+                const pushupLeaderboard = data.pushupLeaderboard.sort(
+                    (a, b) => b.pushupCount - a.pushupCount
+                );
+                const plankLeaderboard = data.plankLeaderboard.sort(
+                    (a, b) => b.plankTime - a.plankTime
+                );
+
+                const pushupContainer =
+                    document.getElementById("pushup-leaderboard");
+                const plankContainer =
+                    document.getElementById("plank-leaderboard");
+
+                pushupLeaderboard.forEach((entry, index) => {
+                    if (entry.name && entry.pushupCount) {
+                        const div = document.createElement("div");
+                        if (index === 0) {
+                            div.className =
+                                "bg-yellow-50 border border-yellow-100 rounded-lg p-4 flex items-center";
+                            div.innerHTML = `
+            <div class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">
+            ${index + 1}
+            </div>
+            <div class="flex-1">
+            <div class="font-semibold">${entry.name}</div>
+            <div class="text-sm text-gray-600">${
+                entry.pushupCount
+            } push-ups • ${entry.pushUpTime} min</div>
+            </div>
+            <div class="text-yellow-500">👑</div>
+          `;
+                        } else {
+                            div.className =
+                                "bg-gray-50 rounded-lg p-4 flex items-center";
+                            div.innerHTML = `
+            <div class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">
+            ${index + 1}
+            </div>
+            <div class="flex-1">
+            <div class="font-semibold">${entry.name}</div>
+            <div class="text-sm text-gray-600">${
+                entry.pushupCount
+            } push-ups • ${entry.pushUpTime} mili</div>
+            </div>
+          `;
+                        }
+                        pushupContainer.appendChild(div);
+                    }
+                });
+
+                plankLeaderboard.forEach((entry, index) => {
+                    if (entry.name && entry.plankTime) {
+                        const div = document.createElement("div");
+                        if (index === 0) {
+                            div.className =
+                                "bg-yellow-50 border border-yellow-100 rounded-lg p-4 flex items-center";
+                            div.innerHTML = `
+            <div class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">
+            ${index + 1}
+            </div>
+            <div class="flex-1">
+            <div class="font-semibold">${entry.name}</div>
+            <div class="text-sm text-gray-600">${
+                entry.plankTime
+            } min plank</div>
+            </div>
+            <div class="text-yellow-500">👑</div>
+          `;
+                        } else {
+                            div.className =
+                                "bg-gray-50 rounded-lg p-4 flex items-center";
+                            div.innerHTML = `
+            <div class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">
+            ${index + 1}
+            </div>
+            <div class="flex-1">
+            <div class="font-semibold">${entry.name}</div>
+            <div class="text-sm text-gray-600">${
+                entry.plankTime
+            } min plank</div>
+            </div>
+          `;
+                        }
+                        plankContainer.appendChild(div);
+                    }
+                });
+            }
+
+            function displayStats(data) {
+                const activeUsers = document.getElementById("active-users");
+                activeUsers.textContent = `👥 Active Users: ${data.pushupLeaderboard.length}`;
+                const avgPushups = document.getElementById("avg-pushups");
+                const avgPlank = document.getElementById("avg-plank");
+
+                const pushupCount = data.pushupLeaderboard.reduce(
+                    (acc, entry) => acc + entry.pushupCount,
+                    0
+                );
+                const avgPushupCount =
+                    pushupCount / data.pushupLeaderboard.length;
+
+                const plankTime = data.plankLeaderboard.reduce(
+                    (acc, entry) => acc + entry.plankTime,
+                    0
+                );
+                const avgPlankTime = plankTime / data.plankLeaderboard.length;
+
+                avgPushups.innerHTML = `
+          <div class="text-center">
+            <div class="text-sm text-gray-600 mb-1">Avg Push-ups</div>
+            <div class="text-3xl font-bold text-blue-600">${avgPushupCount}</div>
+            <div class="text-sm text-gray-600 mt-1">per session</div>
+          </div>
+        `;
+
+                avgPlank.innerHTML = `
+          <div class="text-center">
+            <div class="text-sm text-gray-600 mb-1">Avg Plank Time</div>
+            <div class="text-3xl font-bold text-green-600">${avgPlankTime}</div>
+            <div class="text-sm text-gray-600 mt-1">minutes</div>
+          </div>
+        `;
+            }
+            // Fetch and display the leaderboard data when the page loads
+            window.onload = getLeaderboard;
+        </script>
+    </body>
+</html>

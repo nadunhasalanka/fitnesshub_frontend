@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Device Part Selection</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen p-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <div class="bg-white rounded-t-xl shadow-lg p-6 mb-6">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-3xl font-bold text-gray-800">
+                        Fitness Challenge Hub
+                    </h1>
+                    <div class="flex gap-4">
+                        <!-- <span
+                            class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg"
+                        >
+                            👥 Active Users: 24
+                        </span> -->
+                        <a
+                            href="leaderBoard.html"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                        >
+                            🏆 View Leaderboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Device Selection - Centered with max-width -->
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-md mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">
+                    Select Device
+                </h3>
+                <div class="space-y-6">
+                    <!-- Devices will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Part Type Popup -->
+        <div
+            id="partTypePopup"
+            class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50"
+        >
+            <div
+                class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform transition-all"
+            >
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">
+                    Select Exercise Type
+                </h3>
+                <div class="space-y-6">
+                    <button
+                        class="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                        onclick="showStartButton('pushup')"
+                    >
+                        <span>Push Up</span>
+                        <span>💪</span>
+                    </button>
+                    <button
+                        class="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                        onclick="showStartButton('plank')"
+                    >
+                        <span>Plank</span>
+                        <span>🏋️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Button Popup -->
+        <div
+            id="startPopup"
+            class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50"
+        >
+            <div
+                class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform transition-all"
+            >
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">
+                    Ready to Begin
+                </h3>
+                <button
+                    class="w-full py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                    onclick="startProcess()"
+                >
+                    <span>Start Exercise</span>
+                    <span>🎯</span>
+                </button>
+            </div>
+        </div>
+
+        <script>
+            let selectedDevice = "";
+            let selectedDeviceIp = "";
+            let selectedExercise = "";
+            let userIndex = "";
+
+            window.onload = function () {
+                // Load available devices
+                loadAvailableDevices();
+            };
+
+            function getParameterByName(name, url = window.location.href) {
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return "";
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            async function loadAvailableDevices() {
+                try {
+                    const response = await fetch(
+                        "https://script.google.com/macros/s/AKfycbyzcxRpJrqqezpIcIF13h7cWbZvu93iFcw8Vh1zcUAYLGbd3nV04rrNrRHIjeWsWkDl/exec?type=devices",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "text/plain;charset=utf-8",
+                            },
+                            body: JSON.stringify({
+                                requestType: "getDevices",
+                            }),
+                        }
+                    );
+
+                    const text = await response.text();
+                    let devices;
+                    try {
+                        devices = JSON.parse(text);
+                    } catch {
+                        console.log("Response:", text);
+                        return;
+                    }
+
+                    const deviceContainer =
+                        document.querySelector(".space-y-6");
+                    deviceContainer.innerHTML = "";
+
+                    devices
+                        .filter(
+                            (device) =>
+                                device.deviceStatus === "Available" ||
+                                device.deviceStatus === "available"
+                        )
+                        .forEach((device) => {
+                            deviceContainer.innerHTML += `
+                                <button 
+                                    class="w-full py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 shadow-lg"
+                                    onclick="showPartTypePopup('${device.deviceId}', '${device.deviceIp}')"
+                                >
+                                    ${device.deviceId}
+                                </button>
+                            `;
+                        });
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            }
+
+            function showPartTypePopup(deviceId, deviceIp) {
+                selectedDevice = deviceId;
+                selectedDeviceIp = deviceIp;
+                document
+                    .getElementById("partTypePopup")
+                    .classList.remove("hidden");
+            }
+
+            function showStartButton(exerciseType) {
+                selectedExercise = exerciseType;
+                document
+                    .getElementById("partTypePopup")
+                    .classList.add("hidden");
+                document
+                    .getElementById("startPopup")
+                    .classList.remove("hidden");
+            }
+
+            function startProcess() {
+                // const urlParams = new URLSearchParams(window.location.search);
+                // const index = urlParams.get("index");
+
+                const startUrl = `http://192.168.45.30:3000/start?index=${getParameterByName(
+                    "index"
+                )}&deviceIp=${selectedDeviceIp}&sessionType=${selectedExercise}`;
+
+                console.log(startUrl);
+
+                // window.location.href = `activeSession.html?device=${selectedDevice}&exercise=${selectedExercise}&deviceIp=${selectedDeviceIp}&index=${getParameterByName(
+                //     "index"
+                // )}`;
+
+                fetch(startUrl)
+                    .then((response) => {
+                        // if (response.ok) {
+                        //     window.location.href = `activeSession.html?device=${selectedDevice}&exercise=${selectedExercise}&deviceIp=${selectedDeviceIp}&index=${getParameterByName(
+                        //         "index"
+                        //     )}`;
+                        // }
+
+                        window.location.href = `activeSession.html?device=${selectedDevice}&exercise=${selectedExercise}&deviceIp=${selectedDeviceIp}&index=${getParameterByName(
+                            "index"
+                        )}`;
+                    })
+                    .catch((error) => {
+                        console.error("Error starting session:", error);
+                        window.location.href = `activeSession.html?device=${selectedDevice}&exercise=${selectedExercise}&deviceIp=${selectedDeviceIp}&index=${getParameterByName(
+                            "index"
+                        )}`;
+                    });
+            }
+
+            // Load devices when page loads
+            window.onload = loadAvailableDevices;
+        </script>
+    </body>
+</html>
